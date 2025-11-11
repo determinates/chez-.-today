@@ -24,7 +24,7 @@ h1 {
   color: #111;
   margin: 10rem 0 2rem;
   letter-spacing: 3px;
-  font-size: 40px;
+  font-size: 50px;
   text-shadow: 
     0 0 30px rgba(255, 255, 255, 0.9),
     0 0 60px rgba(255, 255, 255, 0.7),
@@ -59,18 +59,4 @@ h3 {
     0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-.article-list-container {
-  padding: 2rem;
-  z-index: 2;
-  outline: 4px solid hsl(0deg 0% 0% / 0.21);
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(2px) saturate(187%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border-radius: 2px;
-  width: var(--width, auto);
-  height: var(--height, auto);
-  max-width: none;
-  display: block;
-  margin: auto; /* horizontal + vertical */
 
-}
