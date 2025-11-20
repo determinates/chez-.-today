@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chez.today</title>
+    <link rel=stylesheet href="home2.css">
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <h1 id="loadingDate"></h1>
+      </div>
+    </div>
+
+    <h1 id="liveDate"></h1>
+    <div class="time-container" id="timeContainer">
+      <span class="number-roller" id="hoursRoller"></span>
+      <span class="time-separator">:</span>
+      <span class="number-roller" id="minutesRoller"></span>
+    </div>
+
+    <div class="main-layout">
+      <section class="article-section">
+        <!-- Featured / main article -->
+        <article class="featured-article">
+          <img src="images/cat.png" alt="Featured article image" />
+          <div class="content">
+            <div class="featured-label">Article of the day</div>
+            <h3>Main</h3>
+            <p>
+Main
+            </p>
+          </div>
+        </article>
+
+        <!-- 4 mini articles in a row under the main one -->
+        <div class="mini-row">
+          <article class="mini-article">
+            <img src="images/cat.png" alt="Article thumbnail" />
+            <div class="content">
+              <div class="article-meta">Nov 12, 2025</div>
+              <h4>Article 1</h4>
+              <p>Article&nbsp;.</p>
+            </div>
+          </article>          <article class="mini-article">
+            <img src="images/cat.png" alt="Article thumbnail" />
+            <div class="content">
+              <div class="article-meta">Nov 12, 2025</div>
+              <h4>Article 2</h4>
+              <p>Article&nbsp;.</p>
+            </div>
+          </article>          <article class="mini-article">
+            <img src="images/cat.png" alt="Article thumbnail" />
+            <div class="content">
+              <div class="article-meta">Nov 12, 2025</div>
+              <h4>Article 3</h4>
+              <p>Article&nbsp;.</p>
+            </div>
+          </article>          <article class="mini-article">
+            <img src="images/cat.png" alt="Article thumbnail" />
+            <div class="content">
+              <div class="article-meta">Nov 12, 2025</div>
+              <h4>Article 4</h4>
+              <p>Article&nbsp;.</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Powered by <a href="https://discord.gg/bukkit">Autism inc</a>
+    </footer>
+
+    <script>
+      function createDigitRoller() {
+        const roller = document.createElement("div");
+        roller.className = "number-roller-inner";
+
+        for (let i = 0; i <= 9; i++) {
+          const digit = document.createElement("div");
+          digit.className = "number-roller-digit";
+          digit.textContent = i;
+          roller.appendChild(digit);
+        }
+
+        return roller;
+      }
+
+      function createTwoDigitRoller(container) {
+        const tensRoller = document.createElement("span");
+        tensRoller.className = "number-roller";
+        tensRoller.appendChild(createDigitRoller());
+
+        const onesRoller = document.createElement("span");
+        onesRoller.className = "number-roller";
+        onesRoller.appendChild(createDigitRoller());
+
+        container.innerHTML = "";
+        container.appendChild(tensRoller);
+        container.appendChild(onesRoller);
+      }
+
+      function updateDigitRoller(rollerElement, newDigit) {
+        const inner = rollerElement.querySelector(".number-roller-inner");
+        if (!inner) return;
+
+        const currentDigit = parseInt(inner.dataset.currentDigit || "0");
+
+        if (currentDigit !== newDigit) {
+          const digitHeight = 1.2;
+          const targetPosition = -newDigit * digitHeight;
+
+          inner.style.transform = `translateY(${targetPosition}em)`;
+          inner.dataset.currentDigit = newDigit;
+        }
+      }
+
+      function updateTwoDigitRoller(container, newValue) {
+        const rollers = container.querySelectorAll(".number-roller");
+        if (rollers.length !== 2) return;
+
+        const tensDigit = Math.floor(newValue / 10);
+        const onesDigit = newValue % 10;
+
+        updateDigitRoller(rollers[0], tensDigit);
+        updateDigitRoller(rollers[1], onesDigit);
+      }
+
+      function initializeRollers() {
+        const hoursRoller = document.getElementById("hoursRoller");
+        const minutesRoller = document.getElementById("minutesRoller");
+
+        createTwoDigitRoller(hoursRoller);
+        createTwoDigitRoller(minutesRoller);
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const options = { month: "long", day: "numeric", year: "numeric" };
+        const formatted = now.toLocaleDateString("en-US", options);
+        document.getElementById("liveDate").textContent = formatted;
+
+        const loadingDate = document.getElementById("loadingDate");
+        if (loadingDate) {
+          loadingDate.textContent = formatted;
+        }
+      }
+
+      function updateTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        hours = hours % 12 || 12;
+
+        updateTwoDigitRoller(document.getElementById("hoursRoller"), hours);
+        updateTwoDigitRoller(document.getElementById("minutesRoller"), minutes);
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        initializeRollers();
+        updateDateTime();
+        updateTime();
+
+        setInterval(updateTime, 1000);
+        setInterval(updateDateTime, 25000);
+
+        setTimeout(() => {
+          const loadingOverlay = document.getElementById("loadingOverlay");
+          if (loadingOverlay) {
+            loadingOverlay.classList.add("hidden");
+            document.body.classList.add("compact-date");
+            setTimeout(() => {
+              loadingOverlay.style.display = "none";
+            }, 800);
+          } else {
+            document.body.classList.add("compact-date");
+          }
+        }, 1700);
+      });
+    </script>
+  </body>
+</html>
