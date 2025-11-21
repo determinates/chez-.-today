@@ -4,18 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>chez.today</title>
-    <link rel=stylesheet href="home2.css">
-    <style>
-
-    </style>
+    <!-- Make sure your css file is named home2.css or update this link -->
+    <link rel="stylesheet" href="home2.css">
   </head>
   <body>
+    
+    <!-- FIXED HEADER -->
+    <header class="site-header">
+        <a href="../../index.html" class="header-logo">chez.today</a>
+    </header>
+
+    <!-- LOADING SCREEN -->
     <div class="loading-overlay" id="loadingOverlay">
       <div class="loading-content">
         <h1 id="loadingDate"></h1>
       </div>
     </div>
 
+    <!-- DATE & TIME -->
     <h1 id="liveDate"></h1>
     <div class="time-container" id="timeContainer">
       <span class="number-roller" id="hoursRoller"></span>
@@ -23,60 +29,69 @@
       <span class="number-roller" id="minutesRoller"></span>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-layout">
       <section class="article-section">
-        <!-- Featured / main article -->
-        <article class="featured-article">
+        
+        <!-- Featured / Main Article (Clickable) -->
+        <!-- REPLACE href="#" WITH YOUR LINK -->
+        <a href="articles/article-1/index.html" class="featured-article">
           <img src="images/cat.png" alt="Featured article image" />
           <div class="content">
-            <div class="featured-label">Article of the day</div>
-            <h3>Main</h3>
-            <p>
-Main
-            </p>
+            <div class="featured-label">Template</div>
+            <h3>Wow the new template page is out!</h3>
+            <p>hallo !!!</p>
           </div>
-        </article>
+        </a>
 
-        <!-- 4 mini articles in a row under the main one -->
+        <!-- Mini Articles Grid -->
         <div class="mini-row">
-          <article class="mini-article">
+          
+          <!-- Mini Article 1 -->
+          <a href="pages/article-1.html" class="mini-article">
             <img src="images/cat.png" alt="Article thumbnail" />
             <div class="content">
               <div class="article-meta">Nov 12, 2025</div>
               <h4>Article 1</h4>
-              <p>Article&nbsp;.</p>
+              <p>nothing here&nbsp;.</p>
             </div>
-          </article>          <article class="mini-article">
+          </a>          
+
+          <!-- Mini Article 2 -->
+          <a href="pages/article-2.html" class="mini-article">
             <img src="images/cat.png" alt="Article thumbnail" />
             <div class="content">
               <div class="article-meta">Nov 12, 2025</div>
               <h4>Article 2</h4>
-              <p>Article&nbsp;.</p>
+              <p>nothing here&nbsp;.</p>
             </div>
-          </article>          <article class="mini-article">
+          </a>          
+
+          <!-- Mini Article 3 -->
+          <a href="pages/article-3.html" class="mini-article">
             <img src="images/cat.png" alt="Article thumbnail" />
             <div class="content">
               <div class="article-meta">Nov 12, 2025</div>
               <h4>Article 3</h4>
-              <p>Article&nbsp;.</p>
+              <p>nothing here&nbsp;.</p>
             </div>
-          </article>          <article class="mini-article">
+          </a>          
+
+          <!-- Mini Article 4 -->
+          <a href="pages/article-4.html" class="mini-article">
             <img src="images/cat.png" alt="Article thumbnail" />
             <div class="content">
               <div class="article-meta">Nov 12, 2025</div>
               <h4>Article 4</h4>
-              <p>Article&nbsp;.</p>
+              <p>nothing here&nbsp;.</p>
             </div>
-          </article>
+          </a>
 
         </div>
       </section>
     </div>
 
-    <footer>
-      Powered by <a href="https://discord.gg/bukkit">Autism inc</a>
-    </footer>
-
+    <!-- JAVASCRIPT FOR CLOCK & LOADER -->
     <script>
       function createDigitRoller() {
         const roller = document.createElement("div");

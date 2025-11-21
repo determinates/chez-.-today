@@ -1,323 +1,388 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;350;375;400;450;500;600;700;800;900&display=swap");
-
+/* =========================================
+   1. RESET & CORE STYLES
+   ========================================= */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 body {
-  background-color: #f5f0e8;
-  background-image: linear-gradient(
-      0deg,
-      transparent 24%,
-      #e8dcc8 25%,
-      #e8dcc8 26%,
-      transparent 27%,
-      transparent 74%,
-      #e8dcc8 75%,
-      #e8dcc8 76%,
-      transparent 77%,
-      transparent
-    ),
-    linear-gradient(
-      90deg,
-      transparent 24%,
-      #e8dcc8 25%,
-      #e8dcc8 26%,
-      transparent 27%,
-      transparent 74%,
-      #e8dcc8 75%,
-      #e8dcc8 76%,
-      transparent 77%,
-      transparent
-    );
-  background-size: 75px 75px;
-  background-attachment: fixed;
-  overflow: hidden; /* Disables both horizontal and vertical scrolling */
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  min-height: 100vh;
-  height: auto;
-
-  padding: 1rem;
-  padding-bottom: 80px; /* prevents footer overlap */
-
-  font-family: "Montserrat", sans-serif;
-
-  overflow-x: hidden;
+    /* THEME: Yellow Background */
+    background-color: #fdf07e;
+    color: #1a1a1a;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    
+    /* LAYOUT: Center everything vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    min-height: 100vh;
+    
+    /* Spacing: Added extra top padding to account for the fixed header */
+    padding: 140px 1rem 100px 1rem; 
+    
+    overflow-x: hidden;
 }
 
-/* LOADING OVERLAY */
+/* =========================================
+   2. FIXED HEADER
+   ========================================= */
+.site-header {
+    padding: 20px 40px;
+    display: flex;
+    /* Align content to the left since we removed the home icon */
+    justify-content: flex-start; 
+    align-items: center;
+    border-bottom: 5px solid #1a1a1a;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* High z-index to sit on top of everything */
+}
 
+.header-logo {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 20px; /* Slightly larger logo */
+    font-weight: 700;
+    letter-spacing: 0;
+    transition: color 0.2s ease;
+}
+
+.header-logo:hover {
+    color: #f79a00;
+}
+
+/* =========================================
+   3. LOADING OVERLAY
+   ========================================= */
 .loading-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: #f5f0e8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  opacity: 1;
-  transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    position: fixed;
+    inset: 0;
+    background-color: #fdf07e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
 }
 
 .loading-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .loading-content {
-  text-align: center;
-  animation: fadeInUp 0.8s ease-out;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes footerFadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* DATE + TIME */
-
+/* =========================================
+   4. HEADER ELEMENTS (BIGGER DATE & TIME)
+   ========================================= */
 h1 {
-  font-weight: 519;
-  text-align: center;
-  color: #111;
-  margin: 0;
-  letter-spacing: 3px;
-  font-size: 46px;
-  text-shadow:
-    0 0 30px rgba(255, 255, 255, 0.9),
-    0 0 60px rgba(255, 255, 255, 0.7),
-    0 0 90px rgba(255, 255, 255, 0.5),
-    0 3px 6px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 1s ease-out 0.3s both;
-  transform-origin: top center;
+    font-weight: 700;
+    text-align: center;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: -3px;
+    /* MASSIVE DATE SIZE */
+    font-size: clamp(48px, 8vw, 90px); 
+    line-height: 1;
+    text-shadow: 5px 5px 0 rgba(255, 255, 255, 0.5);
+    animation: fadeInUp 1s ease-out 0.3s both;
+    transform-origin: top center;
 }
 
 #liveDate {
-  transition: transform 0.6s ease, font-size 0.6s ease;
-}
-
-body.compact-date #liveDate {
-  transform: translateY(-10px) scale(0.92);
+    transition: transform 0.6s ease;
 }
 
 .time-container {
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-  font-size: 30px;
-  font-weight: 468;
-  color: #111;
-  letter-spacing: 1px;
-  text-shadow:
-    0 0 30px rgba(255, 255, 255, 0.9),
-    0 0 60px rgba(255, 255, 255, 0.7),
-    0 0 90px rgba(255, 255, 255, 0.5),
-    0 3px 6px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 1s ease-out 0.5s both;
-  margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    
+    /* Box styling */
+    background-color: #fff;
+    border: 4px solid #1a1a1a; /* Thicker border */
+    padding: 10px 30px;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    
+    /* BIGGER TIME SIZE */
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0;
+    animation: fadeInUp 1s ease-out 0.5s both;
 }
 
-.time-separator { margin: 0 0.15rem; }
+.time-separator { margin: 0 2px; }
 
 .number-roller {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  height: 1.2em;
-  vertical-align: top;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 1.2em;
+    vertical-align: top;
 }
 
 .number-roller-inner {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .number-roller-digit {
-  height: 1.2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* MAIN CONTENT WRAPPER */
-
+/* =========================================
+   5. MAIN LAYOUT
+   ========================================= */
 .main-layout {
-  flex: 1;
-  width: min(100%, 1100px);
-  margin: 0 auto;
-  padding: 0 1rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 1rem;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 40px;
 }
 
 .article-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 30px;
 }
 
-/* FEATURED ARTICLE */
-
+/* =========================================
+   6. FEATURED ARTICLE (COMPACT)
+   ========================================= */
 .featured-article {
-  width: clamp(260px, 40vw, 420px);
-  height: auto;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* SIZING: Made smaller (550px instead of 700px) */
+    width: clamp(280px, 90%, 550px);
+    
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    
+    border: 3px solid #1a1a1a;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    border-radius: 0; 
+    
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
 }
 
 .featured-article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 #e86665; 
 }
 
 .featured-article img {
-  width: 100%;
-  height: 56%;
-  object-fit: cover;
+    width: 100%;
+    /* SMALLER IMAGE HEIGHT */
+    height: 250px; 
+    object-fit: cover;
+    border-bottom: 3px solid #1a1a1a;
 }
 
 .featured-article .content {
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+    padding: 20px; /* Less padding */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .featured-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #b08a4a;
-  font-weight: 600;
+    align-self: flex-start;
+    font-size: 10px; /* Smaller text */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    background-color: #f6b34b;
+    border: 1px solid #1a1a1a;
+    box-shadow: 2px 2px 0 #1a1a1a;
 }
 
 .featured-article h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  font-weight: 600;
+    margin: 5px 0 0 0;
+    font-size: 26px; /* Smaller title */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: #1a1a1a;
 }
 
 .featured-article p {
-  margin: 0;
-  font-size: 0.82rem;
-  color: #555;
-  line-height: 1.35;
+    margin: 0;
+    font-size: 15px; /* Smaller body text */
+    color: #333;
+    line-height: 1.4;
 }
 
 .article-meta {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #777;
-  font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    font-weight: 700;
+    margin-top: 8px;
 }
 
-/* MINI ARTICLES (RESPONSIVE GRID) */
-
+/* =========================================
+   7. MINI ARTICLES (COMPACT GRID)
+   ========================================= */
 .mini-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px; /* Tighter gap */
+    width: 100%;
 }
 
 .mini-article {
-  width: clamp(150px, 22vw, 240px);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    /* SIZING: Made smaller (250px instead of 320px) */
+    width: 250px; 
+    flex-grow: 0;
+    flex-shrink: 0;
+    
+    background-color: #fff;
+    border: 3px solid #1a1a1a;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .mini-article:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.18);
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #f79a00;
 }
 
 .mini-article img {
-  width: 100%;
-  height: 52%;
-  object-fit: cover;
+    width: 100%;
+    /* SMALLER IMAGE HEIGHT */
+    height: 140px; 
+    object-fit: cover;
+    border-bottom: 3px solid #1a1a1a;
 }
 
 .mini-article .content {
-  padding: 6px 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .mini-article h4 {
-  margin: 0;
-  font-size: 0.85rem;
-  font-weight: 600;
+    margin: 0;
+    font-size: 17px; /* Smaller title */
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
 }
 
 .mini-article p {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #555;
-  line-height: 1.3;
+    margin: 0;
+    font-size: 13px; /* Smaller body text */
+    color: #333;
+    line-height: 1.4;
 }
 
-/* FOOTER */
-
+/* =========================================
+   8. FOOTER
+   ========================================= */
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f5f0e8;
-  color: #000;
-  text-align: center;
-  padding: .7rem;
-  z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 5px solid #1a1a1a;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 15px;
+    z-index: 9999;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
 footer a {
-  color: #000;
-  text-decoration: none;
+    color: #1a1a1a;
+    text-decoration: none;
+    margin: 0 10px;
 }
 
-footer a:hover { text-decoration: underline; }
+footer a:hover {
+    text-decoration: underline;
+    color: #f79a00;
+}
 
-/* RESPONSIVE TWEAKS */
-
+/* =========================================
+   9. RESPONSIVE
+   ========================================= */
 @media (max-width: 768px) {
-  h1 { font-size: 36px; }
-  .time-container { font-size: 26px; }
-  .featured-article { width: 90%; }
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    h1 { font-size: 48px; } /* Still big, but fits mobile */
+    
+    .time-container { 
+        font-size: 24px; 
+        padding: 8px 20px; 
+    }
+    
+    .featured-article, 
+    .mini-article { 
+        width: 100%; 
+        max-width: 100%;
+    }
+    
+    .featured-article img { height: 220px; }
+    
+    .featured-article:hover,
+    .mini-article:hover {
+        transform: none;
+        box-shadow: 6px 6px 0 #1a1a1a;
+    }
 }
