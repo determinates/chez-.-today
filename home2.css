@@ -236,6 +236,8 @@ h1 {
     background-color: #f6b34b;
     border: 1px solid #1a1a1a;
     box-shadow: 2px 2px 0 #1a1a1a;
+        color: #1a1a1a !important;
+    text-decoration: none !important;
 }
 
 .featured-article h3 {

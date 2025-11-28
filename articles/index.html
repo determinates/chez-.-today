@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>remember to change this</title>
+        <link rel="stylesheet" href="article.css" />
+                <link rel="icon" type="image/png" href="../images/chez.png">
+
+    </head>
+    <body>
+        <header class="site-header">
+            
+            <a href="../index.html" class="header-logo">chez.today</a>
+
+
+        </header>
+
+        <article class="article-container">
+            <header class="article-header">
+                <div class="article-header-overlay">
+                    <span class="article-category">minecraft</span>
+                    <h1 class="article-title">My template article</h1>
+
+                    <div class="meta-wrapper">
+                        <div class="article-meta">November 19, 2025</div>
+                        <div class="meta-divider">|</div>
+
+                        <div class="article-meta">
+                            Author:
+                            <span class="social">
+                                <img src="../images/discordcrop.webp" alt="" />
+                                <span class="social-text">chez_man1</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <hr />
+
+            <!-- Intro -->
+
+            <div class="article-body">
+                <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+        <li><a href="#buttons">Buttons</a></li>
+        <li><a href="#lists">Lists and blockquote</a></li>
+    </ul>
+</div>
+
+                <p class="article-intro">intro text</p>
+
+                <!-- Buttons -->
+
+                <h2>buttons</h2>
+
+                <p>buttons are so tuffy</p>
+
+                <pre><code>&lt;a href="https://google.com" target="_blank" class="social"&gt;
+    &lt;span class="social-text"&gt;awesome href thing&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+
+                <a href="https://google.com" target="_blank" class="social">
+                    <span class="social-text">href button</span>
+                </a>
+
+                <pre><code>&lt;span class="social"&gt;
+    &lt;img src="../../images/discordcrop.webp" alt="" /&gt;
+    &lt;span class="social-text"&gt;copy social&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+
+                <span class="social">
+                    <img src="../images/discordcrop.webp" alt="" />
+                    <span class="social-text">copy social</span>
+                </span>
+
+                <!-- Lists below -->
+
+                <h3>Lists and blockquote</h3>
+
+                <p>wow epic cool list. hover over the list it looks so tuff</p>
+
+                <ul>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                </ul>
+
+                <blockquote>"aurick thinks that this website is awesome"</blockquote>
+            </div>
+        </article>
+
+        <script>
+            const socialButtons = document.querySelectorAll(".social:not([href])");
+
+            socialButtons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    const textToCopy = this.querySelector(".social-text").innerText;
+
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        this.classList.add("show-tooltip");
+                        setTimeout(() => {
+                            this.classList.remove("show-tooltip");
+                        }, 1500);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

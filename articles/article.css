@@ -12,6 +12,10 @@ body {
     color: #1a1a1a;
     background-color: #fdf07e;
 }
+html {
+    scroll-padding-top: 80px; /* height of your fixed header */
+    scroll-behavior: smooth; /* optional, nice smooth scrolling */
+}
 
 .site-header {
     padding: 20px 40px;
@@ -25,6 +29,49 @@ body {
     left: 0;
     width: 100%;
     z-index: 100;
+}
+.toc {
+    background: hsl(55 90% 92%);
+    border: 3px solid #1a1a1a;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 3px 3px 0 #1a1a1a;
+        max-width: 277px;   /* make it narrower */
+
+}
+.toc li {
+    margin-bottom: 5px;  /* adjust to taste: 0, 3px, 8px, etc. */
+}
+.toc-title {
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    margin-bottom: 8px;
+}
+
+.toc-list a {
+    text-decoration: none;
+    color: #1a1a1a;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+}
+
+.toc-list a:hover {
+    border-color: #f79a00;
+    color: #e86665;
 }
 
 .header-logo {
@@ -40,33 +87,20 @@ body {
     color: #f79a00;
 }
 
-.header-home {
-    display: flex;
-    align-items: center;
-    transition: transform 0.2s ease;
-}
 
-.header-home:hover {
-    transform: translateX(-3px);
-}
-
-.home-icon {
-    fill: #1a1a1a;
-    transition: fill 0.2s ease;
-}
-
-.header-home:hover .home-icon {
-    fill: #f79a00;
-}
 
 .article-container {
-    max-width: 700px;
+    max-width: 921px;
     margin: 130px auto 60px;
+    background-color: hsl(55 90% 88%); /* softer creamy paper tone */
+    border: solid;
+    border-width: 4.5px
 }
 
 .article-header {
     padding: 50px 40px 40px;
     border-bottom: 4px solid #f79a00;
+    background-color: #ffff
 }
 
 .article-category {
@@ -77,10 +111,10 @@ body {
     margin-bottom: 20px;
     display: inline-block;
     padding: 6px 12px;
-    background-color: #f6b34b;
     transition: none;
     cursor: default;
 }
+
 
 .article-title {
     font-size: 42px;
@@ -216,12 +250,45 @@ ul li:before {
 }
 
 ul li:hover {
-    background-color: #fdf07e;
-    padding-left: 35px;
+    padding-left: 31px;
 }
 
 ul li:hover:before {
     color: #e86665;
+    transform: scale(1.2);
+}
+ol {
+    margin: 20px 0;
+    padding-left: 40px;
+    list-style: none; /* remove default numbering */
+    counter-reset: ol-counter;
+}
+
+ol li {
+    position: relative;
+    padding: 10px 10px 10px 30px;
+    margin-bottom: 8px;
+    cursor: default;
+    transition: all 0.2s ease;
+    counter-increment: ol-counter;
+}
+
+ol li::before {
+    content: counter(ol-counter) ".";
+    position: absolute;
+    left: 0;
+    color: #f79a00; /* matches your ul bullet color */
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+ol li:hover {
+    padding-left: 31px;
+}
+
+ol li:hover::before {
+    color: #e86665; /* matches your ul hover color */
     transform: scale(1.2);
 }
 
